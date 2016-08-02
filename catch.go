@@ -21,7 +21,7 @@ type Context struct {
 	err error
 }
 
-func Try(f func()) (ctx Context) {
+func This(f func()) (ctx Context) {
 	defer func() {
 		if r := recover(); r != nil {
 			if w, ok := r.(WrappedError); ok {

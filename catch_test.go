@@ -13,17 +13,17 @@ func TestMust(t *testing.T) {
 	assert.Panics(t, func() { Must(ErrHello) })
 }
 
-func TestTryNoError(t *testing.T) {
-	Try(func() {
+func TestThisNoError(t *testing.T) {
+	This(func() {
 		t.Log("Everything is OK")
 	}).Catch(func(err error) {
 		assert.Fail(t, "This should not be called, no error happened")
 	})
 }
 
-func TestTryError(t *testing.T) {
+func TestThisError(t *testing.T) {
 	called := false
-	Try(func() {
+	This(func() {
 		Must(ErrHello)
 	}).Catch(func(err error) {
 		called = true
@@ -32,9 +32,9 @@ func TestTryError(t *testing.T) {
 	assert.True(t, called, "Catch was not called")
 }
 
-func TestTryPanic(t *testing.T) {
+func TestThisPanic(t *testing.T) {
 	assert.Panics(t, func() {
-		Try(func() {
+		This(func() {
 			t.Log("Panic!")
 			panic("random panic")
 		}).Catch(func(err error) {
