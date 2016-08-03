@@ -41,3 +41,7 @@ func (ctx Context) Catch(f func(err error)) Context {
 	}
 	return ctx
 }
+
+func (ctx Context) Return() error {
+	return ctx.err
+}

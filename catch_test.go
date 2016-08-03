@@ -32,6 +32,23 @@ func TestThisError(t *testing.T) {
 	assert.True(t, called, "Catch was not called")
 }
 
+func TestReturn(t *testing.T) {
+	assert.Equal(t, ErrHello, This(func() {
+		Must(ErrHello)
+	}).Return())
+}
+
+func TestCatchReturn(t *testing.T) {
+	called := false
+	assert.Equal(t, ErrHello, This(func() {
+		Must(ErrHello)
+	}).Catch(func(err error) {
+		called = true
+		assert.Equal(t, ErrHello, err)
+	}).Return())
+	assert.True(t, called, "Catch was not called")
+}
+
 func TestThisPanic(t *testing.T) {
 	assert.Panics(t, func() {
 		This(func() {
