@@ -1,4 +1,4 @@
-package try
+package scope
 
 type WrappedError struct {
 	err error
@@ -21,7 +21,7 @@ type Context struct {
 	err error
 }
 
-func This(f func()) (ctx Context) {
+func Try(f func()) (ctx Context) {
 	defer func() {
 		if r := recover(); r != nil {
 			if w, ok := r.(WrappedError); ok {
